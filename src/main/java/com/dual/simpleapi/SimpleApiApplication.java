@@ -34,6 +34,11 @@ public class SimpleApiApplication {
         return Map.of("isAdult", (int) age >= 18);
     }
 
+    @GetMapping(value = "/api/todo", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Object> todo() {
+        return Map.of("todo", "Implement this endpoint");
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public Map<String, Object> handleIllegalArgumentException(IllegalArgumentException e) {
         return Map.of("error", e.getMessage());
