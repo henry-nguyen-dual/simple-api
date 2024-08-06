@@ -35,7 +35,7 @@ jobs:
           REPO=${{ github.repository }}
           REPO_NAME=${REPO#*/}
           REPO_NAME_LOWERCASE=$(echo $REPO_NAME | tr '[:upper:]' '[:lower:]')
-          echo "repo_name=REPO_NAME_LOWERCASE" >> $GITHUB_ENV
+          echo "repo_name=$REPO_NAME_LOWERCASE" >> $GITHUB_ENV
       - name: Build and Push Docker
         uses: docker/build-push-action@v4
         with:
