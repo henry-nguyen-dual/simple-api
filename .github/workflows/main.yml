@@ -1,7 +1,7 @@
-name: CI/CD for Spring Boot Project
+name: Build and Push Docker Image for Main Branch
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
