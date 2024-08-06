@@ -11,10 +11,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up JDK 21
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
+          java-version: '17'
           distribution: 'temurin'
       - name: Cache Maven dependencies
         uses: actions/cache@v4
@@ -32,8 +32,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Docker image name
         run: |
-          REPO_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-          echo "repo_name=$REPO_NAME" >> $GITHUB_ENV
+          REPO=${{ github.repository }}
+          REPO_NAME=${REPO#*/}
+          REPO_NAME_LOWERCASE=$(echo $REPO_NAME | tr '[:upper:]' '[:lower:]')
+          echo "repo_name=REPO_NAME_LOWERCASE" >> $GITHUB_ENV
       - name: Build and Push Docker
         uses: docker/build-push-action@v4
         with:
